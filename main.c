@@ -102,9 +102,7 @@ void properName() {
     char textoFinal[30];
     printf("Ingrese la cadena a converrtir\n");
     fflush(stdin);
-    scanf("%s",texto);
-    /*fgets(texto,30,stdin);
-    getchar();*/
+    fgets(texto,30,stdin);
 
     z = strlen(texto);
     //printf("%d",z,"\n");
@@ -144,22 +142,12 @@ void countingVowels() {
 }
 
 void newYear() {
-    int horas =0;
-    int minutos=0;
-    char cadena3[4],*num1;
-    char cadena4[1];
-    printf("Ingrese la hora actual  \n");
-    scanf("%s",&cadena3);
-    printf("%s",cadena3);
-    //horas= atoi(cadena3);
-    minutos= atoi(cadena4);
-    num1 = &cadena3[3];
-    printf("%s",num1);
-    //cadena4[1]=cadena3[4];
-    //printf("\n%s",cadena4);
-    int horatotal=(23-horas)*60;
-    int minutostotales=60-minutos;
-    int minutosrestantestotales=horatotal+minutostotales;
+    int z;
+    char hora[4];
+    printf("ingrese la hora: ");
+    scanf("%s",&hora);
+    printf("%s",hora);
+
     getchar();
 
 
@@ -189,8 +177,8 @@ void deleteRepeats() {
     for (int i = 0; i < z; ++i) {
         for (int j = 0; j < z-1; ++j) {
             if(i!=j){
-                if(cadena[i] == cadena[j]){
-                    cadena[j] = ' ';
+                if(cadena[j] == cadena[i]){
+                    cadena[i] = ' ';
                 }
             }
         }
@@ -209,7 +197,12 @@ void deleteRepeats() {
     }
 
     //////////////
+    printf("de manera normal=");
     for (int i = 0; i < z; ++i) {
+        printf("%c",cadena[i]);
+    }
+    printf("\nAl reves=");
+    for (int i = z; i >= 0; --i) {
         printf("%c",cadena[i]);
     }
 
