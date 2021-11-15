@@ -179,7 +179,7 @@ void intersection() {
 
 void deleteRepeats() {
     int z;
-    char cadena[20];
+    char cadena[20],aux;
     printf("=====Eliminar repetidos=====\n");
     printf("ingrese una cadena: ");
     scanf("%s",&cadena);
@@ -196,11 +196,22 @@ void deleteRepeats() {
         }
 
     }
-    ////////////////////////////////
+
+    ///metodo borbuja :)
+    for (int i = 0; i < z-1; ++i) {
+        for (int j = 0; j < (z-1); ++j) {
+            if(cadena[j] == ' ' && cadena[j+1] != ' '){//si posicion actual es ' '> numero siguiente
+                aux = cadena[j];
+                cadena[j] = cadena[j+1];
+                cadena[j+1] = aux;
+            }
+        }
+    }
+
+    //////////////
     for (int i = 0; i < z; ++i) {
         printf("%c",cadena[i]);
     }
-
 
     getchar();
 }
