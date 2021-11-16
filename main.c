@@ -30,6 +30,9 @@ void searchString();
 
 void properName();
 
+void prueba();
+
+
 int main() {
     menu();
     return 0;
@@ -56,7 +59,8 @@ void menu() {
         scanf("%d", &op);
         switch (op) {
             case 1 :
-                properName();
+                //properName();
+                prueba();
                 break;
 
             case 2 :
@@ -96,14 +100,27 @@ void menu() {
 
 }
 
+void prueba() {
+    char cad[200], *p=cad; //el puntero p comienza desde el principio de cad
+    printf("Teclea una frase: ");
+    fflush(stdin);
+    fgets(cad,200,stdin);
+    while (*p!=0) //mientras p no alcance el character \0 de final de cadena
+    { if (p==cad || (*p!=' ' && *(p-1)==' ')) //condicion de primera letra de una palabra
+            if (*p>='a' && *p<='z') //si es una letra minúscula
+                *p = *p - ('a'-'A'); //también podría ser: *p -= 'a'-'A';
+        p++; //p pasa a apuntar a la siguiente letra
+    }
+    printf("\nLa frase corregida es: %s", cad);
+}
+
 void properName() {
     int cont=0,z, letras=0;
-    char texto[30];
+    char texto[50];
     char textoFinal[30];
     printf("Ingrese la cadena a converrtir\n");
     fflush(stdin);
-    fgets(texto,30,stdin);
-
+    fgets(texto,50,stdin);
     z = strlen(texto);
     //printf("%d",z,"\n");
     if(z > 1) {
@@ -118,7 +135,7 @@ void properName() {
 
         //for para convertir
         for (int i = 0; i < letras; ++i) {
-            textoFinal[i] = toupper(texto[i]);
+                textoFinal[i] = toupper(texto[i]);
         }
 
         //for para mostrar
@@ -142,14 +159,23 @@ void countingVowels() {
 }
 
 void newYear() {
+    const int yearNew = 1439;
     int z;
-    char hora[4];
-    printf("ingrese la hora: ");
+    char hora[5];
+    int horasMIn, min, faltante;
+    int conversion, horaFinal;
+    char p = *hora;
+    printf("ingrese la hora en el formato de 24 horas (00:00): ");
     scanf("%s",&hora);
-    printf("%s",hora);
+    horasMIn = atoi(hora);
+    min = atoi(hora+3);
+    conversion = horasMIn*60;
+    horaFinal = conversion+min;
+   faltante = yearNew - horaFinal;
+
+    printf("los minutos faltantes para año nuevo son: %i minutos", faltante);
 
     getchar();
-
 
 }
 
@@ -170,13 +196,15 @@ void deleteRepeats() {
     char cadena[20],aux;
     printf("=====Eliminar repetidos=====\n");
     printf("ingrese una cadena: ");
-    scanf("%s",&cadena);
+    fflush(stdin);
+    fgets(cadena,20,stdin);
+    //scanf("%s",&cadena);
     z = strlen(cadena);
 
 
     for (int i = 0; i < z; ++i) {
         for (int j = 0; j < z-1; ++j) {
-            if(i!=j){
+            if(i != j){
                 if(cadena[j] == cadena[i]){
                     cadena[i] = ' ';
                 }
@@ -185,7 +213,7 @@ void deleteRepeats() {
 
     }
 
-    ///metodo borbuja :)
+   ///metodo borbuja :)
     for (int i = 0; i < z-1; ++i) {
         for (int j = 0; j < (z-1); ++j) {
             if(cadena[j] == ' ' && cadena[j+1] != ' '){//si posicion actual es ' '> numero siguiente
