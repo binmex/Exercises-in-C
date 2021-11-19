@@ -69,18 +69,21 @@ void menu() {
         switch (op) {
             case 1 :
                 //properName();
+                ///listo
                 prueba();
                 break;
 
             case 2 :
+                //listo
                 printf("Ingrese la cadena de texto: \n");
-                //gets(cadena1);
                 fflush(stdin);
                 fgets(cadena1,45,stdin);
+
                 printf("Ingrese la cadena a comparar: \n");
-                //gets(cadena2);
                 fflush(stdin);
                 fgets(cadena2,45,stdin);
+
+
                 char *buscar = strstr(cadena1, cadena2);
 
                 while (buscar != NULL){
@@ -94,12 +97,14 @@ void menu() {
                 countingVowels();
                 break;
             case 4 :
+                //listo
                 newYear();
                 break;
             case 5:
                 fillCharacters();
                 break;
             case 6:
+                //listo
                 printf("Ingrese la cadena de texto: \n");
                 fflush(stdin);
                 fgets(frase,45,stdin);
@@ -116,15 +121,18 @@ void menu() {
 
                 break;
             case 7:
+                //liestp
                 intersection();
                 break;
             case 8:
+                //listp
                 deleteRepeats();
                 break;
             case 9:
                 wordCount();
                 break;
             case 10 :
+                //listo
                 printf("Ingrese su correo electronico\n>>");
                 fflush(stdin);
                 fgets(cadena,80,stdin);
