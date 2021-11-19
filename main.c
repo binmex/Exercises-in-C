@@ -38,6 +38,17 @@ int main() {
 
 void menu() {
     int op;
+
+    char *cadena1[45];
+    char *cadena2[30];
+    int i= 0;
+
+    char frase[45], caracteres[20];
+
+    char cadena[80];
+    char* val;
+    char* val1;
+
     char *main = "\n==========MENU==========\n"
                  "1->Texto a nombre propio \n"
                  "2->Buscar cadena\n"
@@ -62,9 +73,7 @@ void menu() {
                 break;
 
             case 2 :
-                char *cadena1[45];
-                char *cadena2[30];
-                int i= 0;
+
 
                 printf("Ingrese la cadena de texto: \n");
                 gets(cadena1);
@@ -92,21 +101,21 @@ void menu() {
                 fillCharacters();
                 break;
             case 6:
-                char cadena[45], caracteres[20];
+
 
                 printf("Ingrese la cadena de texto: \n");
                 fflush(stdin);
-                fgets(cadena,45,stdin);
+                fgets(frase,45,stdin);
 
                 printf("\nIngrese el caracter: ");
                 fflush(stdin);
                 fgets(caracteres,20,stdin);
 
-                printf("La cadena es: '%s'\n", cadena);
+                printf("La cadena es: '%s'\n", frase);
                 printf("Y el caracter que se quitara es: %s\n", caracteres);
-                deleteCharacters(&cadena, &caracteres);
+                deleteCharacters(&frase, &caracteres);
 
-                printf("Despues de remover el caracter, la frase es: '%s'\n", cadena);
+                printf("Despues de remover el caracter, la frase es: '%s'\n", frase);
 
                 break;
             case 7:
@@ -119,9 +128,7 @@ void menu() {
                 wordCount();
                 break;
             case 10 :
-                char cadena[80];
-                char* val;
-                char* val1;
+
 
                 printf("Ingrese su correo electronico\n>>");
                 fflush(stdin);
