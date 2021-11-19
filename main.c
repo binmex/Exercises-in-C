@@ -18,15 +18,13 @@ void deleteRepeats();
 
 void intersection();
 
-void deleteCharacters();
+void deleteCharacters(char *cadena, char *caracteres);
 
 void fillCharacters();
 
 void newYear();
 
 void countingVowels();
-
-void searchString();
 
 void properName();
 
@@ -64,7 +62,25 @@ void menu() {
                 break;
 
             case 2 :
-                searchString();
+                char *cadena1[45];
+                char *cadena2[30];
+                int i= 0;
+
+                printf("Ingrese la cadena de texto: \n");
+                gets(cadena1);
+
+                printf("Ingrese la cadena a comparar: \n");
+                gets(cadena2);
+
+
+                char *buscar = strstr(cadena1, cadena2);
+
+                while (buscar != NULL){
+                    i++;
+                    buscar = strstr(buscar + 1, cadena2);
+
+                }
+                printf("Total de coincidencias: %i\n", i);
                 break;
             case 3:
                 countingVowels();
@@ -76,7 +92,22 @@ void menu() {
                 fillCharacters();
                 break;
             case 6:
-                deleteCharacters();
+                char cadena[45], caracteres[20];
+
+                printf("Ingrese la cadena de texto: \n");
+                fflush(stdin);
+                fgets(cadena,45,stdin);
+
+                printf("\nIngrese el caracter: ");
+                fflush(stdin);
+                fgets(caracteres,20,stdin);
+
+                printf("La cadena es: '%s'\n", cadena);
+                printf("Y el caracter que se quitara es: %s\n", caracteres);
+                deleteCharacters(&cadena, &caracteres);
+
+                printf("Despues de remover el caracter, la frase es: '%s'\n", cadena);
+
                 break;
             case 7:
                 intersection();
@@ -88,11 +119,45 @@ void menu() {
                 wordCount();
                 break;
             case 10 :
-                validateMail();
+                char cadena[80];
+                char* val;
+                char* val1;
+
+                printf("Ingrese su correo electronico\n>>");
+                fflush(stdin);
+                fgets(cadena,80,stdin);
+
+                for (int i = 0; i <= strlen(cadena); i++) {
+                    val = strchr(cadena, '@');
+                    if (val != NULL) {
+                        break;
+                    }
+                }
+                /////////
+                for (int i = 0; i <= strlen(cadena); i++) {
+                    val1 = strchr(cadena, '.');
+                    if (val1 != NULL && &val1 > &val) {
+                        printf("si esta ingresando");
+                        break;
+                    }
+                }
+
+                if (tok != NULL) {
+                    if (val1 != NULL && val1 > val) {
+                        printf("Correo valido.");
+                    }
+                    else {
+                        printf("Su correo es invalido, por favor reviselo.");
+                    }
+                }
+                else {
+                    printf("Su correo es invalido, por favor reviselo.");
+                }
+
                 break;
             case 0:
                 op = 0;
-                printf("Gracias");
+                printf("Gracias! :)");
                 break;
 
         }
@@ -150,10 +215,6 @@ void properName() {
 
 }
 
-void searchString() {
-
-}
-
 void countingVowels() {
 
 }
@@ -183,11 +244,83 @@ void fillCharacters() {
 
 }
 
-void deleteCharacters() {
-
+void deleteCharacters(char *cadena, char *caracteres) {
+    int indiceCadena = 0, indiceCadenaLimpia = 0;
+    int deberiaAgregarCaracter = 1;
+    // Recorrer cadena carácter por carácter
+    while (cadena[indiceCadena]) {
+        // Primero suponemos que la letra sí debe permanecer
+        deberiaAgregarCaracter = 1;
+        int indiceCaracteres = 0;
+        // Recorrer los caracteres prohibidos
+        while (caracteres[indiceCaracteres]) {
+            // Y si la letra actual es uno de los caracteres, ya no se agrega
+            if (cadena[indiceCadena] == caracteres[indiceCaracteres]) {
+                deberiaAgregarCaracter = 0;
+            }
+            indiceCaracteres++;
+        }
+        // Dependiendo de la variable de arriba, la letra se agrega a la "nueva
+        // cadena"
+        if (deberiaAgregarCaracter) {
+            cadena[indiceCadenaLimpia] = cadena[indiceCadena];
+            indiceCadenaLimpia++;
+        }
+        indiceCadena++;
+    }
+    // Al final se agrega el carácter NULL para terminar la cadena
+    cadena[indiceCadenaLimpia] = 0;
 }
 
 void intersection() {
+    int contador = 0, acumulado = 0;
+    char auxiliar1[200], auxiliar2[200],cadena1[200], cadena2[200];
+    char *final = "";
+    printf("ingrese su cadena\n");
+    fflush(stdin);
+    fgets(cadena1, 200, stdin);
+    printf("ingrese su cadena dos\n");
+    fflush(stdin);
+    fgets(cadena2, 200, stdin);
+
+
+    for (int i = strlen(cadena2) - 1; i >= 0; --i) {
+        for (int j = 0; j <  strlen(cadena2) - 1; ++j) {
+            if (cadena2[i] == cadena2[j]) contador++;
+        }
+        if (contador > 1) {
+            memset(auxiliar1, 0, 200);
+            memset(auxiliar2, 0, 200);
+            for (int j = i + 1; j <  strlen(cadena2) - 1; ++j) {
+                auxiliar1[acumulado] = cadena2[j];
+                acumulado++;
+            }
+            acumulado = 0;
+            for (int j = 0; j < i; ++j) {
+                auxiliar2[j] = cadena2[j];
+            }
+            memset(cadena2, 0, 200);
+            strcat(strcpy(cadena2, auxiliar2), auxiliar1);
+        }
+        contador = 0;
+    }
+
+    memset(auxiliar1, 0, 200);
+    contador = 0;
+    acumulado = 0;
+    for (int i = 0; i < strlen(cadena2); ++i) {
+        for (int j = 0; j < strlen(cadena1); ++j) {
+            if (cadena2[i] == cadena1[j]) contador++;
+        }
+        if (contador > 0) {
+            auxiliar1[acumulado] = cadena2[i];
+            acumulado++;
+            contador = 0;
+        }
+    }
+    final = auxiliar1;
+    printf("la interseccion de las cadenas son: \n%s \n", final);
+
 
 }
 
@@ -238,9 +371,5 @@ void deleteRepeats() {
 }
 
 void wordCount() {
-
-}
-
-void validateMail() {
 
 }
