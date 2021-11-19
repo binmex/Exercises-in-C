@@ -3,8 +3,8 @@
 Elaborado por:
 
 Robinson Eduardo Aguilar Puentes
-Sebasrtian Garzon
-Diana Diaz
+ - Sebasrtian Garzon
+ - Diana Diaz
 
 EL compilador usado es 
 MINGW 
