@@ -225,10 +225,36 @@ void properName() {
 
 }
 
-void countingVowels() {
 
+//metodos contar vocales...............................................................
+int contarVocales(char *cadena);
+int contarVocales(char *cadena){
+    int vocales = 0;
+    for (int indice = 0; cadena[indice] != '\0'; ++indice){
+        //tolower: convierte un tipo de dato carácter a minúscula
+        char letraActual = tolower(cadena[indice]);
+        if (    letraActual == 'a' ||
+                letraActual == 'e' ||
+                letraActual == 'i' ||
+                letraActual == 'o' ||
+                letraActual == 'u'
+                ){
+            vocales++;
+        }
+    }
+    return vocales;
 }
 
+void countingVowels() {
+
+    char cadena1[1000];
+    printf("\n-----|Escriba una cadena| ");
+    scanf(" %[^\n]",cadena1);
+    int vocales = contarVocales(cadena1);
+    printf("\n-----|Numero de vocales en la cadena es| %d\n", vocales);
+
+}
+//.............................................................
 void newYear() {
     const int yearNew = 1439;
     int z;
@@ -249,10 +275,67 @@ void newYear() {
     getchar();
 
 }
+//agregar caracteres..............................................
+
+void insertarSubcadena(char *original, char *subcadena, int indice) {
+    char inicio[100] = "";
+    strncpy(inicio, original, indice);
+    char fin[100] = "";
+    strncpy(fin, original + indice, strlen(original) - indice);
+    //agrega la subcadena al inicio
+    strcat(inicio, subcadena);
+    strcat(inicio, fin);
+    //Copea dentro de la cadena recibida
+    strcpy(original, inicio);
+}
+
+void inicio(char *cadena,char *caracter,int cuantos){
+    //pone las letras al inicio
+    for (int indice = 0; indice <=(cuantos-1) ; ++indice){
+        insertarSubcadena(cadena, caracter, 0);
+    }
+    printf("|cadena concatenada| %s\n", cadena);
+}
+void final(char *cadena,char *caracter,int cuantos){
+    //pone las letras al final
+    int longi = strlen(cadena);//determina el tamaño
+    for (int indice = 0; indice <=(cuantos-1) ; ++indice){
+        insertarSubcadena(cadena, caracter, longi);
+    }
+    printf("|cadena concatenada| %s\n", cadena);
+}
+
 
 void fillCharacters() {
+    printf("\n-----| escriba una cadena     | ");
+    char cadena[50] ;
+    scanf(" %[^\n]",cadena);
 
+    printf("\n-----| escriba un caracter    | ");
+    char caracter[50] ;
+    scanf("%s", caracter);
+
+    printf("\n-----| cuantas veces          | ");
+    int cuantos ;
+    scanf("%i", &cuantos);
+
+    printf("\n-----|seleccione la ubicacion |\n-----|inicio=1 final=2|");
+    int opcion;
+    scanf(" %i",&opcion);
+
+    switch (opcion) {
+        case 1: {
+            inicio(cadena,caracter,cuantos);
+            break;
+        }
+        case 2: {
+            final(cadena,caracter,cuantos);
+            break;
+        }
+    }
 }
+//...........................................................
+
 
 void deleteCharacters(char *cadena, char *caracteres) {
     int indiceCadena = 0, indiceCadenaLimpia = 0;
@@ -380,6 +463,62 @@ void deleteRepeats() {
     getchar();
 }
 
+//contar palabras repetidas.....................
+
+
+int toLower(char *cadena) {
+    int n = 0;
+    for(int i = 0; i < strlen(cadena); i++) {
+        cadena[i] = tolower(cadena[i]);
+        if(cadena[i] == ' ') {
+            n++;
+        }
+    }
+    return n+1;
+}
+int toLower(char *cadena);
+
 void wordCount() {
+    char cadena[1000];
+    printf("\n-----|Escriba una cadena| ");
+    scanf(" %[^\n]",cadena);
+    char cadena2[20];
+    printf("\n-----|Escriba una palabra| ");
+    scanf(" %[^\n]",&cadena2);
+
+    char aux[strlen(cadena)]; //cadena auxiliar
+    strcpy(aux, cadena); //Copiamos  la cadena original en la cadena auxiliar
+
+    int nPalabras = toLower(aux); // es el numero de palabras
+    char cadena3[nPalabras][30]; //Variable que almacena cada palabra en un espacio
+    char *cadena4 = strtok(aux, " ,.!?"); //Función que convierte una cadena a cadena3.
+    nPalabras = 0;
+    while(cadena4 != NULL) {
+        strcpy(cadena3[nPalabras++], cadena4); //Se almacena cada palabra en un espacio
+        cadena4 = strtok(NULL, " ,.-!?");
+    }
+
+    int contPal[nPalabras]; // numero de repeticiones de cada palabra
+    int palRep = 0; //Variable auxiliar para saber cuantas se repiten.
+
+    for(int i = 0; i <nPalabras; i++) {
+        contPal[i] = 0;
+    }
+    for(int i = 0; i < nPalabras ; i++) {
+        if(strcmp(cadena2  , cadena3[i]) == 0  ){
+            //compara las cadenas si son iguales
+            strcpy(cadena3[i],"*");
+            contPal[palRep]++;
+        }
+    }
+
+    printf("\n%s\n", cadena);
+    printf("Las palabra repetida es");
+    for(int i = 0; i <nPalabras; i++) { // muestra la palabra y su numero de repeticiones
+        if(strcmp(cadena3[i], "*") == 0 && contPal[palRep] != 0 ) {
+            printf(" %s:  %d veces.\n", cadena2, contPal[palRep++]);
+        }
+    }
 
 }
+//....................................
