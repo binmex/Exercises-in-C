@@ -73,15 +73,14 @@ void menu() {
                 break;
 
             case 2 :
-
-
                 printf("Ingrese la cadena de texto: \n");
-                gets(cadena1);
-
+                //gets(cadena1);
+                fflush(stdin);
+                fgets(cadena1,45,stdin);
                 printf("Ingrese la cadena a comparar: \n");
-                gets(cadena2);
-
-
+                //gets(cadena2);
+                fflush(stdin);
+                fgets(cadena2,45,stdin);
                 char *buscar = strstr(cadena1, cadena2);
 
                 while (buscar != NULL){
@@ -101,8 +100,6 @@ void menu() {
                 fillCharacters();
                 break;
             case 6:
-
-
                 printf("Ingrese la cadena de texto: \n");
                 fflush(stdin);
                 fgets(frase,45,stdin);
@@ -128,8 +125,6 @@ void menu() {
                 wordCount();
                 break;
             case 10 :
-
-
                 printf("Ingrese su correo electronico\n>>");
                 fflush(stdin);
                 fgets(cadena,80,stdin);
@@ -149,7 +144,7 @@ void menu() {
                     }
                 }
 
-                if (tok != NULL) {
+                if (val != NULL) {
                     if (val1 != NULL && val1 > val) {
                         printf("Correo valido.");
                     }
