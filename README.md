@@ -2,7 +2,7 @@
 
 Elaborado por:
 
-Robinson Eduardo Aguilar Puentes
+ - Robinson Eduardo Aguilar Puentes
  - Sebasrtian Garzon
  - Diana Diaz
 
